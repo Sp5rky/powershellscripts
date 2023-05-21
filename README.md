@@ -1,11 +1,11 @@
 Launch Command:
 
 ```
-iwr -useb [https://bit.ly/TFwut](https://bit.ly/TFCartestianLaptop) | iex
+iwr -useb https://bit.ly/TFCartestianLaptop | iex
 ```
 
 ```
-irm [https://bit.ly/TFwut](https://bit.ly/TFCartestianLaptop) | iex
+irm https://bit.ly/TFCartestianLaptop | iex
 ```
 If you are having TLS 1.2 Issues or You cannot find or resolve `bit.ly/TFwut` then run with the following command:
 ```
