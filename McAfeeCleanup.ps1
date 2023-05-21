@@ -90,4 +90,6 @@ if ($found) {
 
     Write-Host 'Finished Removing McAfee' -ForegroundColor Green
 }
-else {}
+else {
+    Write-Host 'No McAfee Found' -ForegroundColor Green
+}
