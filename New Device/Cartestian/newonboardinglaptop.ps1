@@ -9,22 +9,22 @@ Set-ExecutionPolicy Unrestricted -Force
 
 Clear-Host
 Write-Host ''
-Write-Host '                   .-+++++++++++++++=.'
-Write-Host '                  -##=-------------*##'
-Write-Host '      ............--..............:##+'
-Write-Host ' .+###############################*=: '
-Write-Host '.##.             ==                   '
-Write-Host '.##=============+##=========-:        '
-Write-Host ' .=++++++++++++*##*++++++++*##:       '
-Write-Host '               :==         =##.       '
-Write-Host '          .+################+.        '
-Write-Host '         -#*::=+=:::::::::.           '
-Write-Host '         ##.  ##-                     '
-Write-Host '        +#*  :#*                      '
-Write-Host '       :##:  +#-                      '
-Write-Host '       +##  :##                       '
-Write-Host '       ##=  ##=                       '
-Write-Host '      :##=:+#*                        '
+Write-Host '                   .-+++++++++++++++=.' -ForegroundColor Red
+Write-Host '                  -##=-------------*##' -ForegroundColor Red
+Write-Host '      ............--..............:##+' -ForegroundColor Red
+Write-Host ' .+###############################*=: ' -ForegroundColor Red
+Write-Host '.##.             ==                   ' -ForegroundColor Red
+Write-Host '.##=============+##=========-:        ' -ForegroundColor Red
+Write-Host ' .=++++++++++++*##*++++++++*##:       ' -ForegroundColor Red
+Write-Host '               :==         =##.       ' -ForegroundColor Red
+Write-Host '          .+################+.        ' -ForegroundColor Red
+Write-Host '         -#*::=+=:::::::::.           ' -ForegroundColor Red
+Write-Host '         ##.  ##-                     ' -ForegroundColor Red
+Write-Host '        +#*  :#*                      ' -ForegroundColor Red
+Write-Host '       :##:  +#-                      ' -ForegroundColor Red
+Write-Host '       +##  :##                       ' -ForegroundColor Red
+Write-Host '       ##=  ##=                       ' -ForegroundColor Red
+Write-Host '      :##=:+#*                        ' -ForegroundColor Red
 Write-Host ''    
 Write-Host 'Twisted Fish - Cartestian New Laptop Setup'
 Write-Host 'Device will automatically restart for Updates'
