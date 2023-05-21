@@ -15,3 +15,5 @@ Import-Module PSWindowsUpdate > $null
 
 Write-Progress -Activity "Twisted Fish Automation - Running Windows Update" -Status "Step 6 of 6"
 Get-WindowsUpdate -AcceptAll -Install -AutoReboot
+
+Write-Host 'Finished Running Windows Update' -ForegroundColor Green

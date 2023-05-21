@@ -5,9 +5,9 @@ $downloadPath = 'C:\Temp\MCPR.zip'
 $extractPath = 'C:\Temp'
 $params = '-p StopServices,MFSY,PEF,MXD,CSP,Sustainability,MOCP,MFP,APPSTATS,Auth,EMproxy,FWdiver,HW,MAS,MAT,MBK,MCPR,McProxy,McSvcHost,VUL,MHN,MNA,MOBK,MPFP,MPFPCU,MPS,SHRED,MPSCU,MQC,MQCCU,MSAD,MSHR,MSK,MSKCU,MWL,NMC,RedirSvc,VS,REMEDIATION,MSC,YAP,TRUEKEY,LAM,PCB,Symlink,SafeConnect,MGS,WMIRemover,RESIDUE -v -s'
 
-# Create C:\Temp if it doesn't exist
-if (-not (Test-Path -Path 'C:\Temp')) {
-    New-Item -Path 'C:\' -Name 'Temp' -ItemType 'Directory'
+# Check if the directory exists and create it if it does not
+if (-not (Test-Path $extractPath)) {
+    New-Item -ItemType Directory -Force -Path $extractPath
 }
 
 # Download the File
@@ -63,3 +63,5 @@ Write-Progress @progParams
 # Delete temporary files and folders
 Remove-Item -Path $downloadPath
 Remove-Item -Path (Join-Path -Path $extractPath -ChildPath 'MCPR') -Recurse
+
+Write-Host 'Finished Removing McAfee' -ForegroundColor Green

@@ -233,3 +233,6 @@ if ($laptoptype -eq '1') {
 elseif ($laptoptype -eq '2') {
     Analytics
 }
+
+
+Write-Host 'Finished Installing Apps' -ForegroundColor Green
