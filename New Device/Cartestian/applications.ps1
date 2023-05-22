@@ -127,11 +127,9 @@ function Developer {
         }
         try {
             Expand-Archive -Path $zipFile.FullName -DestinationPath $destinationPath -Force
-            Write-Host "Successfully extracted '$($zipFile.Name)' to '$destinationPath'"
 
             # Delete the original zip file
             Remove-Item -Path $zipFile.FullName -Force
-            Write-Host "Deleted '$($zipFile.Name)'"
         }
         catch {
             Write-Warning "Failed to extract '$($zipFile.Name)': $_"
@@ -235,11 +233,9 @@ function Analytics {
         
         try {
             Expand-Archive -Path $zipFile.FullName -DestinationPath $destinationPath -Force
-            Write-Host "Successfully extracted '$($zipFile.Name)' to '$destinationPath'"
 
             # Delete the original zip file
             Remove-Item -Path $zipFile.FullName -Force
-            Write-Host "Deleted '$($zipFile.Name)'"
         }
         catch {
             Write-Warning "Failed to extract '$($zipFile.Name)': $_"
