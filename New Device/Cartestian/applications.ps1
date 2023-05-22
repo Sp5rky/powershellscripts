@@ -137,7 +137,32 @@ function Developer {
             Write-Warning "Failed to extract '$($zipFile.Name)': $_"
         }
     }
-    # extra code to install
+    
+    # Create shortcuts on Public Desktop for the Applications.
+    $desktopPath = [Environment]::GetFolderPath('CommonDesktopDirectory')
+
+    $applications = @(
+        'C:\Program Files\sqldeveloper\sqldeveloper.exe',
+        'C:\Program Files\Workbench\SQLWorkbench64.exe',
+        'C:\Program Files\eclipse.exe'
+    )
+
+    foreach ($appPath in $applications) {
+        if (Test-Path $appPath) {
+            $appFile = Split-Path -Path $appPath -Leaf
+            $shortcutPath = Join-Path -Path $desktopPath -ChildPath "$appFile.lnk"
+
+            $shell = New-Object -ComObject WScript.Shell
+            $shortcut = $shell.CreateShortcut($shortcutPath)
+            $shortcut.TargetPath = $appPath
+            $shortcut.Save()
+
+            Write-Host "Shortcut created for $appPath"
+        }
+        else {
+            Write-Warning "Application not found at path: $appPath"
+        }
+    }
 }
 
 function Analytics {
@@ -158,7 +183,7 @@ function Analytics {
     Write-Progress -Activity 'Installing Analytics laptop' -Completed
 
     $downloadPath = 'C:\Temp'
-    $anal1 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9CAB1ECFC3DC039E%21661041&authkey=ANTSHPqYbhEa4mk'
+    $anal1 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21661041&authkey=ANTSHPqYbhEa4mk'
 
     $files = @{
         'RStudio.zip' = $anal1
@@ -220,7 +245,24 @@ function Analytics {
             Write-Warning "Failed to extract '$($zipFile.Name)': $_"
         }
     }
-    # extra code to install  
+
+    #Install RStudio
+    $installerPath = 'C:\Program Files\RStudio\RStudio-2023.03.1-446.exe'
+    $arguments = '/S /v /qn'
+    $applicationPath = 'C:\Program Files\RStudio\rstudio.exe'
+    $shortcutPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('CommonDesktopDirectory'), 'RStudio.lnk')
+    
+    # Install RStudio
+    Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
+    
+    # Delete the installer file
+    Remove-Item -Path $installerPath -Force
+    
+    # Create a shortcut on the public desktop
+    $shell = New-Object -ComObject WScript.Shell
+    $shortcut = $shell.CreateShortcut($shortcutPath)
+    $shortcut.TargetPath = $applicationPath
+    $shortcut.Save()    
 }
 
 # Always run Standard
@@ -233,6 +275,5 @@ if ($laptoptype -eq '1') {
 elseif ($laptoptype -eq '2') {
     Analytics
 }
-
 
 Write-Host 'Finished Installing Apps' -ForegroundColor Green
