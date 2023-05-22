@@ -141,7 +141,7 @@ function Developer {
 }
 
 function Analytics {
-    Write-Host -Activity 'Installing Analytics laptop...' -ForegroundColor Green
+    Write-Host 'Installing Analytics laptop...' -ForegroundColor Green
     $analapps = @(
         'RProject.Rtools'
         'OSGeo.QGIS'
