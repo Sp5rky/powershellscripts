@@ -262,7 +262,7 @@ function Analytics {
     $shell = New-Object -ComObject WScript.Shell
     $shortcut = $shell.CreateShortcut($shortcutPath)
     $shortcut.TargetPath = $applicationPath
-    $shortcut.Save()    
+    $shortcut.Save()
 }
 
 # Always run Standard
