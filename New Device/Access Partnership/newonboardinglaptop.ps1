@@ -7,22 +7,22 @@
 
 Clear-Host
 Write-Host ''
-Write-Host '                   .-+++++++++++++++=.    '
-Write-Host '                  -##=-------------*##    '
-Write-Host '      ............--..............:##+    '
-Write-Host ' .+###############################*=:     '
-Write-Host '.##.             ==                       '
-Write-Host '.##=============+##=========-:            '
-Write-Host ' .=++++++++++++*##*++++++++*##:           '
-Write-Host '               :==         =##.           '
-Write-Host '          .+################+.            '
-Write-Host '         -#*::=+=:::::::::.               '
-Write-Host '         ##.  ##-                         '
-Write-Host '        +#*  :#*                          '
-Write-Host '       :##:  +#-                          '
-Write-Host '       +##  :##                           '
-Write-Host '       ##=  ##=                           '
-Write-Host '      :##=:+#*                            '
+Write-Host '                   .-+++++++++++++++=.' -ForegroundColor Red
+Write-Host '                  -##=-------------*##' -ForegroundColor Red
+Write-Host '      ............--..............:##+' -ForegroundColor Red
+Write-Host ' .+###############################*=: ' -ForegroundColor Red
+Write-Host '.##.             ==                   ' -ForegroundColor Red
+Write-Host '.##=============+##=========-:        ' -ForegroundColor Red
+Write-Host ' .=++++++++++++*##*++++++++*##:       ' -ForegroundColor Red
+Write-Host '               :==         =##.       ' -ForegroundColor Red
+Write-Host '          .+################+.        ' -ForegroundColor Red
+Write-Host '         -#*::=+=:::::::::.           ' -ForegroundColor Red
+Write-Host '         ##.  ##-                     ' -ForegroundColor Red
+Write-Host '        +#*  :#*                      ' -ForegroundColor Red
+Write-Host '       :##:  +#-                      ' -ForegroundColor Red
+Write-Host '       +##  :##                       ' -ForegroundColor Red
+Write-Host '       ##=  ##=                       ' -ForegroundColor Red
+Write-Host '      :##=:+#*                        ' -ForegroundColor Red
 Write-Host ''    
 Write-Host 'Twisted Fish - AP New Laptop Setup'
 Write-Host ''
@@ -31,12 +31,10 @@ $manufacturer = (Get-WmiObject -Class:Win32_ComputerSystem).Manufacturer
 if ($manufacturer -eq 'Hewlett-Packard' -or $manufacturer -eq 'HP') {
     Write-Host 'Starting Bloatware Removal' -ForegroundColor Green
 
-    # Download the file
     $url = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9CAB1ECFC3DC039E%21661653&authkey=AEEmWpFLFnhjboA'
     $output = './uninstallHPCO.iss'
     Invoke-WebRequest -Uri $url -OutFile $output
 
-    # Run the bloatware removal script
     $remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/HPbloatware.ps1'
     $scriptBlock = [Scriptblock]::Create($remoteScript)
     Invoke-Command -ScriptBlock $scriptBlock | Out-Null

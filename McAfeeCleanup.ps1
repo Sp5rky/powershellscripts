@@ -33,20 +33,19 @@ if ($found) {
     if (-not (Test-Path $extractPath)) {
         New-Item -ItemType Directory -Force -Path $extractPath
     }
-
+    
     # Download the File
-    $download = Start-BitsTransfer -Source $sourceUrl -Destination $downloadPath -Asynchronous
-    while ($download.JobState -ne 'Transferred') {
-        [int] $dlProgress = ($download.BytesTransferred / $download.BytesTotal) * 100
-        Write-Progress -Activity 'Downloading McAfee Cleanup Tool...' -Status 'Downloading' -PercentComplete $dlProgress
-    }
-    Complete-BitsTransfer $download.JobId
+    Write-Progress -Activity 'Downloading McAfee Remover...' -Status 'Downloading...'
+    Set-Variable ProgressPreference SilentlyContinue
+    Invoke-WebRequest -Uri $sourceUrl -OutFile $downloadPath -UseBasicParsing
+    Set-Variable ProgressPreference Continue
 
     # Extract zip file to temporary folder
     Expand-Archive -LiteralPath $downloadPath -DestinationPath $extractPath
 
     # Construct path to mccleanup.exe
     $exePath = Join-Path -Path $extractPath -ChildPath 'MCPR\mccleanup.exe'
+
 
     # Define progress bar parameters
     $progParams = @{
