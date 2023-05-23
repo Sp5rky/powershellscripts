@@ -275,8 +275,24 @@ Stop-Process -Name explorer -Force
 $explorerProcess = Start-Process -FilePath explorer.exe -PassThru -WindowStyle Hidden -ErrorAction SilentlyContinue -Verb RunAs -ArgumentList ('-NoStartMenu', '-NoTray', '-NoTaskbar')
 $explorerProcess | Wait-Process
 
-Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'TaskbarAl' -Value 0 -Type DWord
-Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'TaskbarMn' -Value 0 -Type DWord
-Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'TaskbarDa' -Value 0 -Type DWord
-Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowTaskViewButton' -Value 0 -Type DWord
-Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxTaskbarMode' -Value 0 -Type DWord
+$allUsersHive = Get-ChildItem -Path 'Registry::HKEY_USERS'
+$targetKeyPath = 'Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+
+foreach ($userHive in $allUsersHive) {
+    $userSID = $userHive.PSChildName
+    $userKeyPath = "Registry::HKEY_USERS\$userSID\$targetKeyPath"
+
+    # Check if the registry path exists for the user SID
+    if (Test-Path $userKeyPath) {
+        Set-ItemProperty -Path $userKeyPath -Name 'TaskbarAl' -Value 0 -Type DWord
+        Set-ItemProperty -Path $userKeyPath -Name 'TaskbarMn' -Value 0 -Type DWord
+        Set-ItemProperty -Path $userKeyPath -Name 'TaskbarDa' -Value 0 -Type DWord
+        Set-ItemProperty -Path $userKeyPath -Name 'ShowTaskViewButton' -Value 0 -Type DWord
+    }
+}
+
+# Modify settings for the current user
+Set-ItemProperty -Path "HKCU:\$targetKeyPath" -Name 'TaskbarAl' -Value 0 -Type DWord
+Set-ItemProperty -Path "HKCU:\$targetKeyPath" -Name 'TaskbarMn' -Value 0 -Type DWord
+Set-ItemProperty -Path "HKCU:\$targetKeyPath" -Name 'TaskbarDa' -Value 0 -Type DWord
+Set-ItemProperty -Path "HKCU:\$targetKeyPath" -Name 'ShowTaskViewButton' -Value 0 -Type DWord
