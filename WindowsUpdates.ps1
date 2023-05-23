@@ -1,3 +1,9 @@
+#Run Microsoft Store Updates in background while doing Windows Updates
+Start-Job -ScriptBlock {
+    Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
+} | Out-Null
+
+#Start Windows Updates Process
 Write-Progress -Activity "Twisted Fish Automation - Installing NuGet Package Provider" -Status "Step 1 of 6"
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force > $null
 
@@ -15,5 +21,10 @@ Import-Module PSWindowsUpdate > $null
 
 Write-Progress -Activity "Twisted Fish Automation - Running Windows Update" -Status "Step 6 of 6"
 Get-WindowsUpdate -AcceptAll -Install -AutoReboot
+
+#Run Microsoft Store Updates again as the first time it will normally update MS Store App first this just finishes whatever is left to install.
+Start-Job -ScriptBlock {
+    Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
+} | Out-Null
 
 Write-Host 'Finished Running Windows Update' -ForegroundColor Green
