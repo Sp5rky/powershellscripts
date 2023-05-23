@@ -35,11 +35,6 @@ Write-Host '2 for Analytics'
 Write-Host '3 for Standard'
 $laptoptype = Read-Host 'Please enter your choice'
 
-Write-Host 'Starting Application Download/Install' -ForegroundColor Green
-$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/New%20Device/Cartestian/applications.ps1'
-$scriptBlock = [Scriptblock]::Create($remoteScript)
-Invoke-Command -ScriptBlock $scriptBlock -ArgumentList $laptoptype | Out-Null
-
 Write-Host 'Starting Mcafee Cleanup Tool' -ForegroundColor Green
 $remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/McAfeeCleanup.ps1'
 $scriptBlock = [Scriptblock]::Create($remoteScript)
@@ -54,3 +49,8 @@ Write-Host 'Starting Windows Update' -ForegroundColor Green
 $remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/WindowsUpdates.ps1'
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
+
+Write-Host 'Starting Application Download/Install' -ForegroundColor Green
+$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/New%20Device/Cartestian/applications.ps1'
+$scriptBlock = [Scriptblock]::Create($remoteScript)
+Invoke-Command -ScriptBlock $scriptBlock -ArgumentList $laptoptype | Out-Null

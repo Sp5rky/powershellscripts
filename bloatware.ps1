@@ -77,6 +77,7 @@ $bloatware = @(
     '*Wunderlist*'
     '*Flipboard*'
     '*Twitter*'
+    '*Journal*'
     '*Facebook*'
     '*Royal Revolt*'
     '*Sway*'
