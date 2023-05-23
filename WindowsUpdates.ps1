@@ -20,7 +20,7 @@ Write-Progress -Activity "Twisted Fish Automation - Importing PSWindowsUpdate Mo
 Import-Module PSWindowsUpdate > $null
 
 Write-Progress -Activity "Twisted Fish Automation - Running Windows Update" -Status "Step 6 of 6"
-Get-WindowsUpdate -AcceptAll -Install -AutoReboot
+Get-WindowsUpdate -AcceptAll -Install -IgnoreReboot
 
 #Run Microsoft Store Updates again as the first time it will normally update MS Store App first this just finishes whatever is left to install.
 Start-Job -ScriptBlock {
