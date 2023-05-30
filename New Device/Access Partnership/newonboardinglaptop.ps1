@@ -23,7 +23,7 @@ if (-not $isInAdministratorsGroup) {
 }
 if (-not $isAdministrator) {
     Write-Output 'The current PowerShell session is not running as an administrator. Starting a new PowerShell session as an administrator...'
-    Start-Process -FilePath 'powershell' -ArgumentList 'iwr -useb https://bit.ly/TFAccessLaptop | iex' -Verb runas
+    Start-Process -FilePath 'powershell' -ArgumentList 'iwr -useb https://tinyurl.com/TFAccessLaptop | iex' -Verb runas
     exit
 }
 
