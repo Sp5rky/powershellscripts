@@ -23,7 +23,7 @@ if (-not $isInAdministratorsGroup) {
 }
 if (-not $isAdministrator) {
     Write-Output 'The current PowerShell session is not running as an administrator. Starting a new PowerShell session as an administrator...'
-    Start-Process -FilePath 'powershell' -ArgumentList 'iwr -useb https://bit.ly/TFCartestianLaptop | iex' -Verb runas
+    Start-Process -FilePath 'powershell' -ArgumentList 'iwr -useb https://bit.ly/TFAccessLaptop | iex' -Verb runas
     exit
 }
 
@@ -71,3 +71,16 @@ Write-Host 'Starting Windows Update' -ForegroundColor Green
 $remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/WindowsUpdates.ps1'
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
+
+# Once the script finishes run it again removing the current user as administrator (very dirty method for winget workaround)
+$currentuser = whoami
+if (-not $isInAdministratorsGroup) {
+    Start-Process -FilePath 'powershell' -ArgumentList "Add-LocalGroupMember -Group 'Administrators' -Member '$currentuser' /delete" -Verb runas
+    $seconds = 15
+    for ($i = 1; $i -le $seconds; $i++) {
+        Write-Progress -Activity 'Logout' -Status "Logging out in $((15 - $i)) seconds" -PercentComplete (($i / $seconds) * 100)
+        Start-Sleep -Seconds 1
+    }
+    Shutdown.exe /l
+    exit
+}
