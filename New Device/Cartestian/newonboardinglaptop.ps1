@@ -4,7 +4,6 @@
     Author:           George Slight
     Creation Date:    May 10, 2022
 #>
-
 # Check if the current PowerShell session is running as an administrator and save the current user to a variable for later
 $currentuser = whoami
 $isAdministrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
