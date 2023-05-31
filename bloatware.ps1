@@ -63,6 +63,8 @@ $bloatware = @(
     'Microsoft.MicrosoftOfficeHub'
     'Clipchamp.Clipchamp'
     'SpotifyAB.SpotifyMusic'
+    '*MyASUS*'
+    '*ASUS Business*'
     'E046963F.AIMeetingManager'
     'E0469640.SmartAppearance'
     'MirametrixInc.GlancebyMirametrix'
