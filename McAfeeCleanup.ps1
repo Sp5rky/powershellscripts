@@ -1,3 +1,10 @@
+<#
+.NOTES
+	Version:        1.0
+	Author:         George Slight
+	Creation Date:  02/06/2023
+#>
+
 # McAfee Cleanup Tool
 # Here we check for bunch of McAfee install locations to check if any of these exists then to run the script to speed up this step.
 $installLocations = @(

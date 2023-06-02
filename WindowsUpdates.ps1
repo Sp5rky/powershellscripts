@@ -1,3 +1,10 @@
+<#
+.NOTES
+	Version:        1.0
+	Author:         George Slight
+	Creation Date:  02/06/2023
+#>
+
 #Run Microsoft Store Updates in background while doing Windows Updates
 Start-Job -ScriptBlock {
     Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod

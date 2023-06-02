@@ -1,3 +1,10 @@
+<#
+.NOTES
+	Version:        1.0
+	Author:         George Slight
+	Creation Date:  02/06/2023
+#>
+
 #Remove HP Documentation
 if (Test-Path 'C:\Program Files\HP\Documentation\Doc_uninstall.cmd' -PathType Leaf) {
     Try {

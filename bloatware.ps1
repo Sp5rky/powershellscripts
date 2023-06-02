@@ -1,3 +1,10 @@
+<#
+.NOTES
+	Version:        1.0
+	Author:         George Slight
+	Creation Date:  02/06/2023
+#>
+
 # Trial shortcuts/files
 $trialFiles = @(
     'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Adobe Offers.lnk'
