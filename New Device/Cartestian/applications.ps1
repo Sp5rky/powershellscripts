@@ -90,11 +90,11 @@ function Developer {
                 catch {
                     $retryCount++
                     if ($retryCount -ge $retryLimit) {
-                        Write-Warning "There was an error downloading the file after $retryLimit attempts: $_"
+                        Write-Warning "There was an error downloading the $filename after $retryLimit attempts: $_"
                         break
                     }
                     else {
-                        Write-Warning "Error downloading the file, attempt $retryCount of $retryLimit : $_"
+                        Write-Warning "Error downloading the $filename, attempt $retryCount of $retryLimit : $_"
                         Start-Sleep -Seconds 5  # Wait for 5 seconds before retrying
                     }
                 }
@@ -199,11 +199,11 @@ function Analytics {
                 catch {
                     $retryCount++
                     if ($retryCount -ge $retryLimit) {
-                        Write-Warning "There was an error downloading the file after $retryLimit attempts: $_"
+                        Write-Warning "There was an error downloading the $filename after $retryLimit attempts: $_"
                         break
                     }
                     else {
-                        Write-Warning "Error downloading the file, attempt $retryCount of $retryLimit : $_"
+                        Write-Warning "Error downloading the $filename, attempt $retryCount of $retryLimit : $_"
                         Start-Sleep -Seconds 5  # Wait for 5 seconds before retrying
                     }
                 }
