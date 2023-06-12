@@ -9,7 +9,7 @@ $currentuser = whoami
 $isAdministrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 # Check if the current user is a member of the Administrators group
-$isInAdministratorsGroup = ((net localgroup Administrators) -like "*$currentuser*")
+#$isInAdministratorsGroup = ((net localgroup Administrators) -like "*$currentuser*")
 #if (-not $isInAdministratorsGroup) {
 #    Write-Host 'The current user is not a member of the Administrators group. Adding now and will logout run powershell again as Administrator once logged back in' -ForegroundColor Red
 #    Start-Process -FilePath 'powershell' -ArgumentList "Add-LocalGroupMember -Group 'Administrators' -Member '$currentuser'" -Verb runas
