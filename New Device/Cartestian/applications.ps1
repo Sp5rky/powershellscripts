@@ -36,7 +36,7 @@ function Developer {
         'OpenJS.NodeJS'
         'Oracle.JDK.19'
         'Oracle.JavaRuntimeEnvironment'
-        'Python.Python.3.9 -v 3.9.5'
+        'Python.Python.3.10'
         'Microsoft.VisualStudioCode'
         'Git.Git'
         'Canonical.Ubuntu.2204'

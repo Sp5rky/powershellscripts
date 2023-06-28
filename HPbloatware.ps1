@@ -9,14 +9,12 @@
 if (Test-Path 'C:\Program Files\HP\Documentation\Doc_uninstall.cmd' -PathType Leaf) {
     Try {
         Invoke-Item 'C:\Program Files\HP\Documentation\Doc_uninstall.cmd'
-        Write-Host 'Successfully removed provisioned package: HP Documentation' 
     }
     Catch {
         Write-Host  "Error Remvoving HP Documentation $($_.Exception.Message)" 
     }
 }
 Else {
-    Write-Host  'HP Documentation is not installed' 
 }
 
 #Remove HP Support Assistant silently
@@ -26,7 +24,6 @@ $HPSAuninstall = 'C:\Program Files (x86)\HP\HP Support Framework\UninstallHPSA.e
 if (Test-Path -Path 'HKLM:\Software\WOW6432Node\Hewlett-Packard\HPActiveSupport') {
     Try {
         Remove-Item -Path 'HKLM:\Software\WOW6432Node\Hewlett-Packard\HPActiveSupport'
-        Write-Host  "HP Support Assistant regkey deleted $($_.Exception.Message)" 
     }
     Catch {
         Write-Host  "Error retreiving registry key for HP Support Assistant: $($_.Exception.Message)" 
@@ -39,7 +36,6 @@ Else {
 if (Test-Path $HPSAuninstall -PathType Leaf) {
     Try {
         & $HPSAuninstall /s /v/qn UninstallKeepPreferences=FALSE
-        Write-Host 'Successfully removed provisioned package: HP Support Assistant silently' 
     }
     Catch {
         Write-Host  "Error uninstalling HP Support Assistant: $($_.Exception.Message)" 
@@ -56,12 +52,10 @@ $HPCOuninstall = 'C:\Program Files (x86)\InstallShield Installation Information\
 
 #copy uninstall file
 xcopy /y .\uninstallHPCO.iss C:\Windows\install\
-Write-Host  'Succesfully copied file uninstallHPCO.iss to C:\Windows\install ' 
 
 if (Test-Path $HPCOuninstall -PathType Leaf) {
     Try {
         & $HPCOuninstall -runfromtemp -l0x0413  -removeonly -s -f1C:\Windows\install\uninstallHPCO.iss
-        Write-Host 'Successfully removed HP Connection Optimizer' 
     }
     Catch {
         Write-Host  "Error uninstalling HP Connection Optimizer: $($_.Exception.Message)" 
@@ -140,7 +134,6 @@ $InstalledPrograms = Get-Package | Where-Object { $UninstallPrograms -contains $
 ForEach ($ProvPackage in $ProvisionedPackages) {
     Try {
         $Null = Remove-AppxProvisionedPackage -PackageName $ProvPackage.PackageName -Online -ErrorAction Stop
-        Write-Host "Successfully removed provisioned package: [$($ProvPackage.DisplayName)]" 
     }
     Catch {
         Write-Host  "Failed to remove provisioned package: [$($ProvPackage.DisplayName)] Error message: $($_.Exception.Message)" 
@@ -151,7 +144,6 @@ ForEach ($ProvPackage in $ProvisionedPackages) {
 ForEach ($AppxPackage in $InstalledPackages) {
     Try {
         $Null = Remove-AppxPackage -Package $AppxPackage.PackageFullName -AllUsers -ErrorAction Stop
-        Write-Host "Successfully removed Appx package: [$($AppxPackage.Name)]" 
     }
     Catch {
         Write-Host  "Failed to remove Appx package: [$($AppxPackage.Name)] Error message: $($_.Exception.Message)" 
@@ -162,7 +154,6 @@ ForEach ($AppxPackage in $InstalledPackages) {
 $InstalledPrograms | ForEach-Object {
     Try {
         $Null = $_ | Uninstall-Package -AllVersions -Force -ErrorAction Stop
-        Write-Host "Successfully uninstalled: [$($_.Name)]" 
     }
     Catch {
         Write-Host  "Failed to uninstall: [$($_.Name)] Error message: $($_.Exception.Message)" 
@@ -172,7 +163,6 @@ $InstalledPrograms | ForEach-Object {
 #Fallback attempt 1 to remove HP Wolf Security using msiexec
 Try {
     MsiExec /x '{0E2E04B0-9EDD-11EB-B38C-10604B96B11E}' /qn /norestart
-    Write-Host 'Fallback to MSI uninistall for HP Wolf Security initiated' 
 }
 Catch {
     Write-Host  "Failed to uninstall HP Wolf Security using MSI - Error message: $($_.Exception.Message)" 
@@ -181,7 +171,6 @@ Catch {
 #Fallback attempt 2 to remove HP Wolf Security using msiexec
 Try {
     MsiExec /x '{4DA839F0-72CF-11EC-B247-3863BB3CB5A8}' /qn /norestart
-    Write-Host 'Fallback to MSI uninistall for HP Wolf 2 Security initiated' 
 }
 Catch {
     Write-Host  "Failed to uninstall HP Wolf Security 2 using MSI - Error message: $($_.Exception.Message)" 
@@ -197,7 +186,6 @@ $pathFT = 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Free Trials.lnk'
 if (Test-Path $pathTCO) {
     Try {
         Remove-Item -LiteralPath $pathTCO -Force -Recurse
-        Write-Host "Shortcut for $pathTCO removed" 
     }
     Catch {
         Write-Host  "Error deleting $pathTCO $($_.Exception.Message)" 
@@ -210,7 +198,6 @@ Else {
 if (Test-Path $pathTCOc -PathType Leaf) {
     Try {
         Remove-Item -Path $pathTCOc  -Force -Recurse
-        Write-Host "Shortcut for $pathTCOc removed" 
     }
     Catch {
         Write-Host  "Error deleting $pathTCOc $($_.Exception.Message)" 
@@ -223,7 +210,6 @@ Else {
 if (Test-Path $pathOS) {
     Try {
         Remove-Item -LiteralPath $pathOS  -Force -Recurse
-        Write-Host "Shortcut for $pathOS removed" 
     }
     Catch {
         Write-Host  "Error deleting $pathOS $($_.Exception.Message)" 
@@ -236,7 +222,6 @@ Else {
 if (Test-Path $pathFT -PathType Leaf) {
     Try {
         Remove-Item -Path $pathFT -Force -Recurse
-        Write-Host "Shortcut for $pathFT removed" 
     }
     Catch {
         Write-Host  "Error deleting $pathFT $($_.Exception.Message)" 
@@ -248,4 +233,3 @@ Else {
 
 #Clean up uninstall file for HP Connection Optimizer
 Remove-Item -Path C:\Windows\install\uninstallHPCO.iss -Force
-Write-Host  'Succesfully deleted file C:\Windows\install\uninstallHPCO.iss ' 
