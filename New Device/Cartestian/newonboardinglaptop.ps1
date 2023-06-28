@@ -92,7 +92,9 @@ Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 
 # Once the script finishes run it again removing the current user as administrator (very dirty method for winget workaround)
 $currentuser = whoami
-if (-not $isInAdministratorsGroup) {
+$isInAdministratorsGroup = ((net localgroup Administrators) | ForEach-Object { $_.ToLower() } | Select-String -Pattern $currentuser.ToLower() -SimpleMatch)
+
+if ($isInAdministratorsGroup) {
     Start-Process -FilePath 'powershell' -ArgumentList "Add-LocalGroupMember -Group 'Administrators' -Member '$currentuser' /delete" -Verb runas
     $seconds = 15
     for ($i = 1; $i -le $seconds; $i++) {
