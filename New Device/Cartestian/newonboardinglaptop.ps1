@@ -95,7 +95,7 @@ $currentuser = whoami
 $isInAdministratorsGroup = ((net localgroup Administrators) | ForEach-Object { $_.ToLower() } | Select-String -Pattern $currentuser.ToLower() -SimpleMatch)
 
 if ($isInAdministratorsGroup) {
-    Start-Process -FilePath 'powershell' -ArgumentList "Add-LocalGroupMember -Group 'Administrators' -Member '$currentuser' /delete" -Verb runas
+    Remove-LocalGroupMember -Group 'Administrators' -Member $currentuser
     $seconds = 15
     for ($i = 1; $i -le $seconds; $i++) {
         Write-Progress -Activity 'Logout' -Status "Logging out in $((15 - $i)) seconds" -PercentComplete (($i / $seconds) * 100)
