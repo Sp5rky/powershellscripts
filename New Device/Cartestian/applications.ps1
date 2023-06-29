@@ -240,6 +240,7 @@ function Analytics {
     $arguments = '/S /v /qn'
     $applicationPath = 'C:\Program Files\RStudio\rstudio.exe'
     $shortcutPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('CommonDesktopDirectory'), 'RStudio.lnk')
+    Write-Host 'Starting RStudio Install'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
     
     # Delete the installer file
@@ -254,6 +255,7 @@ function Analytics {
     # Install Alteryx
     $installerPath = 'C:\Program Files\AlteryxInstall\AlteryxInstallx64_2023.1.1.200.exe'
     $arguments = '/s'
+    Write-Host 'Starting Alteryx Install'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
 
     # Delete the installer file
@@ -262,6 +264,7 @@ function Analytics {
     # Install Alteryx Patch
     $installerPath = 'C:\Program Files\AlteryxPatchInstall\AlteryxPatchInstall_2023.1.1.1.200.exe'
     $arguments = '/s'
+    Write-Host 'Starting Alteryx Patch Install'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
 
     # Delete the installer file
@@ -270,6 +273,7 @@ function Analytics {
     # Install Alteryx R Tools
     $installerPath = 'C:\Program Files\RInstaller\RInstaller_2023.1.1.200.exe'
     $arguments = '/s'
+    Write-Host 'Starting Alteryx R Tools Install'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
 
     # Delete the installer file
