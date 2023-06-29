@@ -169,9 +169,15 @@ function Analytics {
 
     $downloadPath = 'C:\Temp'
     $anal1 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21661041&authkey=ANTSHPqYbhEa4mk'
+    $anal2 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703286&authkey=!ABmuVh1CSj0yCBM'
+    $anal3 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703285&authkey=!ALD5-45EwRaGUoE'
+    $anal4 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703284&authkey=!AMC4iYU2HD165pg'
 
     $files = @{
         'RStudio.zip' = $anal1
+        'AlteryxNonAdminInstall.zip' = $anal2
+        'RNonAdminInstall.zip' = $anal3
+        'AlteryxNonAdminPatchInstall.zip' = $anal4
     }
 
     # Check if the directory exists and create it if it does not
