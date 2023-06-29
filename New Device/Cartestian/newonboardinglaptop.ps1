@@ -90,6 +90,10 @@ $remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 
+# Get the PCs serial number and rename the PC to cart-<serial number>
+$Serial = (Get-WmiObject Win32_BIOS).SerialNumber
+Rename-Computer -NewName cart-$Serial -Force
+
 # Once the script finishes run it again removing the current user as administrator (very dirty method for winget workaround)
 $currentuser = whoami
 $isInAdministratorsGroup = ((net localgroup Administrators) | ForEach-Object { $_.ToLower() } | Select-String -Pattern $currentuser.ToLower() -SimpleMatch)
