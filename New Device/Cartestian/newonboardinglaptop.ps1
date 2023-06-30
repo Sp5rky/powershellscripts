@@ -2,7 +2,7 @@
 .NOTES
     Version:          1.0.0
     Author:           George Slight
-    Creation Date:    May 10, 2022
+    Creation Date:    May 10, 2023
 #>
 # Check if the current PowerShell session is running as an administrator and save the current user to a variable for later
 $currentuser = whoami
