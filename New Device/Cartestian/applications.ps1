@@ -246,11 +246,12 @@ function Analytics {
     $arguments = '/S /v /qn'
     $applicationPath = 'C:\Program Files\RStudio\rstudio.exe'
     $shortcutPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('CommonDesktopDirectory'), 'RStudio.lnk')
-    Write-Host 'Starting RStudio Install'
+    Write-Progress -Activity "Installing RStudio" -Status 'Starting Install...'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
     
     # Delete the installer file
     Remove-Item -Path $installerPath -Force
+    Write-Progress -Activity "Installing RStudio" -Status 'Install Complete' -Completed
     
     # Create a shortcut on the public desktop
     $shell = New-Object -ComObject WScript.Shell
@@ -261,29 +262,32 @@ function Analytics {
     # Install Alteryx
     $installerPath = 'C:\Program Files\Alteryx\AlteryxInstallx64_2023.1.1.200.exe'
     $arguments = '/s'
-    Write-Host 'Starting Alteryx Install'
+    Write-Progress -Activity "Installing Alteryx" -Status 'Starting Install...'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
 
     # Delete the installer file
     Remove-Item -Path $installerPath -Force
+    Write-Progress -Activity "Installing Alteryx" -Status 'Install Complete' -Completed
 
     # Install Alteryx Patch
     $installerPath = 'C:\Program Files\Alteryx\AlteryxPatchInstall_2023.1.1.1.200.exe'
     $arguments = '/s'
-    Write-Host 'Starting Alteryx Patch Install'
+    Write-Progress -Activity "Installing Alteryx Patch" -Status 'Starting Install...'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
 
     # Delete the installer file
     Remove-Item -Path $installerPath -Force
+    Write-Progress -Activity "Installing Alteryx Patch" -Status 'Install Complete' -Completed
 
     # Install Alteryx R Tools
     $installerPath = 'C:\Program Files\Alteryx\RInstaller_2023.1.1.200.exe'
     $arguments = '/s'
-    Write-Host 'Starting Alteryx R Tools Install'
+    Write-Progress -Activity "Installing Alteryx R Tools" -Status 'Starting Install...'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
 
     # Delete the installer file
     Remove-Item -Path $installerPath -Force
+    Write-Progress -Activity "Installing Alteryx R Tools" -Status 'Install Complete' -Completed
 }
 
 # Always run Standard
