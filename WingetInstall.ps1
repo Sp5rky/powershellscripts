@@ -1,3 +1,10 @@
+<#
+.NOTES
+	Version:        1.0
+	Author:         George Slight
+	Creation Date:  02/06/2023
+#>
+
 $latestWingetMsixBundleUri = $(Invoke-RestMethod https://api.github.com/repos/microsoft/winget-cli/releases/latest).assets.browser_download_url | Where-Object { $_.EndsWith('.msixbundle') }
 $latestWingetMsixBundle = $latestWingetMsixBundleUri.Split('/')[-1]
 Write-Progress -Activity 'Installing Winget CLI...' -Status 'Downloading Step 1 of 2'
