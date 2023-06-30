@@ -221,12 +221,18 @@ function Analytics {
     }
     
     $zipFiles = Get-ChildItem -Path $downloadPath -Filter '*.zip'
+    
     foreach ($zipFile in $zipFiles) {
-        $destinationPath = Join-Path -Path 'C:\Program Files' -ChildPath ($zipFile.BaseName)
-        
+        # If the basename of the zip file is in the list, extract it to the Alteryx directory
+        if ($zipFile.BaseName -in @('AlteryxInstall', 'RInstaller', 'AlteryxPatchInstall')) {
+            $destinationPath = 'C:\Program Files\Alteryx'
+        } else {
+            $destinationPath = Join-Path -Path 'C:\Program Files' -ChildPath ($zipFile.BaseName)
+        }
+    
         try {
             Expand-Archive -Path $zipFile.FullName -DestinationPath $destinationPath -Force
-
+    
             # Delete the original zip file
             Remove-Item -Path $zipFile.FullName -Force
         }
