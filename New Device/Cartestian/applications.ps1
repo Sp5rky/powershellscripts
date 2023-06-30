@@ -1,3 +1,10 @@
+<#
+.NOTES
+    Version:          1.5
+    Author:           George Slight
+    Creation Date:    May 16, 2023
+#>
+
 param (
     [Parameter(Mandatory = $true)]
     [string]$laptoptype

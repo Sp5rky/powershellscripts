@@ -1,3 +1,10 @@
+<#
+.NOTES
+    Version:          1.0
+    Author:           George Slight
+    Creation Date:    June 30, 2023
+#>
+
 $downloadPath = 'C:\Temp'
 $anal1 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703298&authkey=!AFjQIx-HG9Km368'
 $anal2 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703297&authkey=!ADR8_wTpmstBwaI'
