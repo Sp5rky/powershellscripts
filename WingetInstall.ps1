@@ -7,6 +7,6 @@ Set-Variable ProgressPreference Continue
 Write-Progress -Activity 'Installing Winget CLI...' -Status 'Downloading Step 2 of 2'
 Set-Variable ProgressPreference SilentlyContinue
 Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
-Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
+Try { Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx -ErrorAction Stop } Catch {}
 Add-AppxPackage $latestWingetMsixBundle
 Set-Variable ProgressPreference Continue
