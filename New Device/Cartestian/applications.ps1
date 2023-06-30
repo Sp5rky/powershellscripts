@@ -259,7 +259,7 @@ function Analytics {
     $shortcut.Save()
 
     # Install Alteryx
-    $installerPath = 'C:\Program Files\AlteryxInstall\AlteryxInstallx64_2023.1.1.200.exe'
+    $installerPath = 'C:\Program Files\Alteryx\AlteryxInstallx64_2023.1.1.200.exe'
     $arguments = '/s'
     Write-Host 'Starting Alteryx Install'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
@@ -268,7 +268,7 @@ function Analytics {
     Remove-Item -Path $installerPath -Force
 
     # Install Alteryx Patch
-    $installerPath = 'C:\Program Files\AlteryxPatchInstall\AlteryxPatchInstall_2023.1.1.1.200.exe'
+    $installerPath = 'C:\Program Files\Alteryx\AlteryxPatchInstall_2023.1.1.1.200.exe'
     $arguments = '/s'
     Write-Host 'Starting Alteryx Patch Install'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
@@ -277,7 +277,7 @@ function Analytics {
     Remove-Item -Path $installerPath -Force
 
     # Install Alteryx R Tools
-    $installerPath = 'C:\Program Files\RInstaller\RInstaller_2023.1.1.200.exe'
+    $installerPath = 'C:\Program Files\Alteryx\RInstaller_2023.1.1.200.exe'
     $arguments = '/s'
     Write-Host 'Starting Alteryx R Tools Install'
     Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
