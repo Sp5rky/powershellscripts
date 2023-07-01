@@ -36,4 +36,5 @@ Try { Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx -ErrorAction Stop 
 
 # Install the latest .msixbundle file of winget-cli
 Add-AppxPackage $latestWingetMsixBundle
+Write-Progress -Activity 'Installing Winget CLI...' -Status 'Completed' -Completed
 Set-Variable ProgressPreference Continue
