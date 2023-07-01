@@ -12,7 +12,7 @@ $latestWingetMsixBundleUri = $(Invoke-RestMethod https://api.github.com/repos/mi
 $latestWingetMsixBundle = $latestWingetMsixBundleUri.Split('/')[-1]
 
 # Show a progress message for the first download step
-Write-Progress -Activity 'Installing Winget CLI...' -Status 'Downloading Step 1 of 2'
+Write-Progress -Activity 'Installing Winget CLI' -Status 'Downloading Step 1 of 2'
 
 # Temporarily set the ProgressPreference variable to SilentlyContinue to suppress progress bars
 Set-Variable ProgressPreference SilentlyContinue
@@ -24,7 +24,7 @@ Invoke-WebRequest -Uri $latestWingetMsixBundleUri -OutFile "./$latestWingetMsixB
 Set-Variable ProgressPreference Continue
 
 # Show a progress message for the second download step
-Write-Progress -Activity 'Installing Winget CLI...' -Status 'Downloading Step 2 of 2'
+Write-Progress -Activity 'Installing Winget CLI' -Status 'Downloading Step 2 of 2'
 
 Set-Variable ProgressPreference SilentlyContinue
 
@@ -36,5 +36,5 @@ Try { Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx -ErrorAction Stop 
 
 # Install the latest .msixbundle file of winget-cli
 Add-AppxPackage $latestWingetMsixBundle
-Write-Progress -Activity 'Installing Winget CLI...' -Status 'Completed' -Completed
+Write-Progress -Activity 'Installing Winget CLI' -Status 'Install Complete' -Completed
 Set-Variable ProgressPreference Continue
