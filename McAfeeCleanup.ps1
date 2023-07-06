@@ -91,8 +91,8 @@ if ($found) {
     Write-Progress @progParams
 
     # Delete temporary files and folders
-    Remove-Item -Path $downloadPath
-    Remove-Item -Path (Join-Path -Path $extractPath -ChildPath 'MCPR') -Recurse
+    Remove-Item -Path $downloadPath -Force -Confirm:$false
+    Remove-Item -Path (Join-Path -Path $extractPath -ChildPath 'MCPR') -Recurse -Force -Confirm:$false
 
     Write-Host 'Finished Removing McAfee' -ForegroundColor Green
 }
