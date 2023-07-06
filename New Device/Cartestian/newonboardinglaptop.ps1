@@ -105,6 +105,5 @@ if ($isInAdministratorsGroup) {
         Write-Progress -Activity 'Logout' -Status "Logging out in $((15 - $i)) seconds" -PercentComplete (($i / $seconds) * 100)
         Start-Sleep -Seconds 1
     }
-    Shutdown.exe /l
-    exit
+    Write-Host 'Onboarding Complete, User removed from Administrator group'
 }
