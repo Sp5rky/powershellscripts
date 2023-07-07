@@ -1,7 +1,7 @@
 <#
 .NOTES
     Version:          1.0.0
-    Author:           George Slight
+    Author:           George Slight @ Twisted Fish
     Creation Date:    May 10, 2023
 #>
 # Check if the current PowerShell session is running as an administrator and save the current user to a variable for later
