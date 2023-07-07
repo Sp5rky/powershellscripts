@@ -17,6 +17,15 @@ Write-Progress -Activity 'Installing Winget CLI' -Status 'Downloading Step 1 of 
 # Temporarily set the ProgressPreference variable to SilentlyContinue to suppress progress bars
 Set-Variable ProgressPreference SilentlyContinue
 
+Invoke-WebRequest -Uri https://www.nuget.org/api/v2/package/Microsoft.UI.Xaml -OutFile .\microsoft.ui.xaml.nupkg.zip
+Expand-Archive -Path .\microsoft.ui.xaml.nupkg.zip -Force
+
+# Get the .appx file in the directory
+$appxFile = Get-ChildItem -Path .\microsoft.ui.xaml.nupkg\tools\AppX\x64\Release -Filter "*.appx" | Select-Object -First 1
+
+# Install the .appx file
+Add-AppxPackage -Path $appxFile.FullName
+
 # Download the latest .msixbundle file of winget-cli from GitHub releases
 Invoke-WebRequest -Uri $latestWingetMsixBundleUri -OutFile "./$latestWingetMsixBundle"
 
