@@ -24,7 +24,7 @@ Expand-Archive -Path .\microsoft.ui.xaml.nupkg.zip -Force
 $appxFile = Get-ChildItem -Path .\microsoft.ui.xaml.nupkg\tools\AppX\x64\Release -Filter "*.appx" | Select-Object -First 1
 
 # Install the .appx file
-Add-AppxPackage -Path $appxFile.FullName
+Try { Add-AppxPackage -Path $appxFile.FullName -ErrorAction Stop } Catch {}
 
 # Download the latest .msixbundle file of winget-cli from GitHub releases
 Invoke-WebRequest -Uri $latestWingetMsixBundleUri -OutFile "./$latestWingetMsixBundle"
@@ -44,6 +44,6 @@ Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -O
 Try { Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx -ErrorAction Stop } Catch {}
 
 # Install the latest .msixbundle file of winget-cli
-Add-AppxPackage $latestWingetMsixBundle
+Try { Add-AppxPackage $latestWingetMsixBundle -ErrorAction Stop} Catch {}
 Write-Progress -Activity 'Installing Winget CLI' -Status 'Install Complete' -Completed
 Set-Variable ProgressPreference Continue
