@@ -106,4 +106,5 @@ if ($isInAdministratorsGroup) {
         Start-Sleep -Seconds 1
     }
     Write-Host 'Onboarding Complete, User removed from Administrator group'
+    Pause
 }
