@@ -58,16 +58,5 @@ $remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 
-# Once the script finishes run it again removing the current user as administrator (very dirty method for winget workaround)
-$currentuser = whoami
-$isInAdministratorsGroup = ((net localgroup Administrators) | ForEach-Object { $_.ToLower() } | Select-String -Pattern $currentuser.ToLower() -SimpleMatch)
-
-if ($isInAdministratorsGroup) {
-    Remove-LocalGroupMember -Group 'Administrators' -Member $currentuser
-    $seconds = 15
-    for ($i = 1; $i -le $seconds; $i++) {
-        Write-Progress -Activity 'Logout' -Status "Logging out in $((15 - $i)) seconds" -PercentComplete (($i / $seconds) * 100)
-        Start-Sleep -Seconds 1
-    }
-    Write-Host 'Onboarding Complete, User removed from Administrator group'
-}
+Write-Host 'Onboarding Complete, User removed from Administrator group'
+Pause
