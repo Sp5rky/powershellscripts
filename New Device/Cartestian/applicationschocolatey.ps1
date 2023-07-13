@@ -39,6 +39,7 @@ function Developer {
     Write-Host 'Installing Developer laptop...' -ForegroundColor Green
     $devapps = @(
         'pgadmin4'
+        'git'
         'postman'
         'awscli'
         'nodejs'
@@ -46,10 +47,9 @@ function Developer {
         'jre8'
         'python310'
         'vscode'
-        'git'
-        'wsl-ubuntu-2204'
         'virtualbox'
         'docker-desktop'
+        'wsl-ubuntu-2204'
     )
 
     $total = $devapps.Count
