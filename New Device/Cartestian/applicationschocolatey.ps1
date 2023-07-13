@@ -161,9 +161,9 @@ function Developer {
 function Analytics {
     Write-Host 'Installing Analytics laptop...' -ForegroundColor Green
     $analapps = @(
-        'choco install rtools'
-        'choco install qgis'
-        'choco install r.studio'
+        'rtools'
+        'qgis'
+        'r.studio'
     )
 
     $total = $analapps.Count
