@@ -2,7 +2,7 @@
 .NOTES
     Version:          1.0.0
     Author:           George Slight @ Twisted Fish
-    Creation Date:    May 10, 2023
+    Creation Date:    July 13, 2023
 #>
 $isAdministrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if (-not $isAdministrator) {
