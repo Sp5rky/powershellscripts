@@ -13,15 +13,16 @@ param (
 function Standard {
     Write-Host 'Installing Standard laptop...' -ForegroundColor Green
     $apps = @(
-        'Google.Chrome'
-        'Mozilla.Firefox'
-        'OpenVPNTechnologies.OpenVPN'
-        'PuTTY.PuTTY'
-        'Notepad++.Notepad++'
-        'WinMerge.WinMerge'
-        'WinSCP.WinSCP'
-        'DominikReichl.KeePass'
-        '7zip.7zip'
+        'googlechrome'
+        'firefox'
+        'openvpn'
+        'tapwindows'
+        'putty'
+        'notepadplusplus'
+        'winmerge'
+        'winscp'
+        'keepass'
+        '7zip'
     )
     $total = $apps.Count
     $current = 0
@@ -29,7 +30,7 @@ function Standard {
         $current++
         $percentComplete = ($current / $total) * 100
         Write-Progress -Activity 'Installing Standard laptop' -Status "Installing $app" -PercentComplete $percentComplete
-        winget install -e --accept-source-agreements --accept-package-agreements --silent --id $app
+        choco -y -f --acceptlicense $app
     }
     Write-Progress -Activity 'Installing Standard laptop' -Completed
 }
@@ -37,18 +38,18 @@ function Standard {
 function Developer {
     Write-Host 'Installing Developer laptop...' -ForegroundColor Green
     $devapps = @(
-        'PostgreSQL.pgAdmin'
-        'Postman.Postman'
-        'Amazon.AWSCLI'
-        'OpenJS.NodeJS'
-        'Oracle.JDK.19'
-        'Oracle.JavaRuntimeEnvironment'
-        'Python.Python.3.10'
-        'Microsoft.VisualStudioCode'
-        'Git.Git'
-        'Canonical.Ubuntu.2204'
-        'Oracle.VirtualBox'
-        'Docker.DockerDesktop'
+        'pgadmin4'
+        'postman'
+        'awscli'
+        'nodejs'
+        'oraclejdk'
+        'jre8'
+        'python310'
+        'vscode'
+        'git'
+        'wsl-ubuntu-2204'
+        'virtualbox'
+        'docker-desktop'
     )
 
     $total = $devapps.Count
@@ -57,7 +58,7 @@ function Developer {
         $current++
         $percentComplete = ($current / $total) * 100
         Write-Progress -Activity 'Installing Developer laptop' -Status "Installing $devapp" -PercentComplete $percentComplete
-        winget install -e --accept-source-agreements --accept-package-agreements --silent --id $devapp
+        choco -y -f --acceptlicense $devapp
     }
     Write-Progress -Activity 'Installing Developer laptop' -Completed
 
@@ -160,8 +161,9 @@ function Developer {
 function Analytics {
     Write-Host 'Installing Analytics laptop...' -ForegroundColor Green
     $analapps = @(
-        'RProject.Rtools'
-        'OSGeo.QGIS'
+        'choco install rtools'
+        'choco install qgis'
+        'choco install r.studio'
     )
 
     $total = $analapps.Count
@@ -170,21 +172,19 @@ function Analytics {
         $current++
         $percentComplete = ($current / $total) * 100
         Write-Progress -Activity 'Installing Analytics laptop' -Status "Installing $analapp" -PercentComplete $percentComplete
-        winget install -e --accept-source-agreements --accept-package-agreements --silent --id $analapp
+        choco -y -f --acceptlicense $analapp
     }
     Write-Progress -Activity 'Installing Analytics laptop' -Completed
 
     $downloadPath = 'C:\Temp'
-    $anal1 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21661041&authkey=ANTSHPqYbhEa4mk'
-    $anal2 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703298&authkey=!AFjQIx-HG9Km368'
-    $anal3 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703297&authkey=!ADR8_wTpmstBwaI'
-    $anal4 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703296&authkey=!AJL1-aoiGE6VfBA'
+    $anal1 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703298&authkey=!AFjQIx-HG9Km368'
+    $anal2 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703297&authkey=!ADR8_wTpmstBwaI'
+    $anal3 = 'https://onedrive.live.com/download?cid=9CAB1ECFC3DC039E&resid=9cab1ecfc3dc039e%21703296&authkey=!AJL1-aoiGE6VfBA'
 
     $files = @{
-        'RStudio.zip' = $anal1
-        'AlteryxInstall.zip' = $anal2
-        'RInstaller.zip' = $anal3
-        'AlteryxPatchInstall.zip' = $anal4
+        'AlteryxInstall.zip' = $anal1
+        'RInstaller.zip' = $anal2
+        'AlteryxPatchInstall.zip' = $anal3
     }
 
     # Check if the directory exists and create it if it does not
@@ -247,24 +247,6 @@ function Analytics {
             Write-Warning "Failed to extract '$($zipFile.Name)': $_"
         }
     }
-
-    #Install RStudio
-    $installerPath = 'C:\Program Files\RStudio\RStudio-2023.03.1-446.exe'
-    $arguments = '/S /v /qn'
-    $applicationPath = 'C:\Program Files\RStudio\rstudio.exe'
-    $shortcutPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('CommonDesktopDirectory'), 'RStudio.lnk')
-    Write-Progress -Activity "Installing RStudio" -Status 'Starting Install...'
-    Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
-    
-    # Delete the installer file
-    Remove-Item -Path $installerPath -Force
-    Write-Progress -Activity "Installing RStudio" -Status 'Install Complete' -Completed
-    
-    # Create a shortcut on the public desktop
-    $shell = New-Object -ComObject WScript.Shell
-    $shortcut = $shell.CreateShortcut($shortcutPath)
-    $shortcut.TargetPath = $applicationPath
-    $shortcut.Save()
 
     # Install Alteryx
     $installerPath = 'C:\Program Files\Alteryx\AlteryxInstallx64_2023.1.1.200.exe'

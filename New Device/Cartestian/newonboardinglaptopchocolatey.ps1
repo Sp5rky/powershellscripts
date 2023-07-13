@@ -4,11 +4,7 @@
     Author:           George Slight @ Twisted Fish
     Creation Date:    May 10, 2023
 #>
-# Check if the current PowerShell session is running as an administrator and save the current user to a variable for later
-$currentuser = whoami
 $isAdministrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-
-# Check if the current user is a member of the Administrators group
 if (-not $isAdministrator) {
     Write-Output 'The current PowerShell session is not running as an administrator. Starting a new PowerShell session as an administrator...'
     Start-Process -FilePath 'powershell' -ArgumentList 'iwr -useb https://bit.ly/TFCartestianLaptop | iex' -Verb runas
@@ -46,7 +42,7 @@ Write-Host '3 for Standard'
 $laptoptype = Read-Host 'Please enter your choice'
 
 Write-Host 'Starting Chocolatey Install' -ForegroundColor Green
-$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/chocoatelyinstall.ps1'
+$remoteScript = Invoke-RestMethod -Uri 'https://community.chocolatey.org/install.ps1'
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 
@@ -82,17 +78,5 @@ Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 $Serial = (Get-WmiObject Win32_BIOS).SerialNumber
 Rename-Computer -NewName cart-$Serial -Force
 
-# Once the script finishes run it again removing the current user as administrator (very dirty method for winget workaround)
-$currentuser = whoami
-$isInAdministratorsGroup = ((net localgroup Administrators) | ForEach-Object { $_.ToLower() } | Select-String -Pattern $currentuser.ToLower() -SimpleMatch)
-
-if ($isInAdministratorsGroup) {
-    Remove-LocalGroupMember -Group 'Administrators' -Member $currentuser
-    $seconds = 15
-    for ($i = 1; $i -le $seconds; $i++) {
-        Write-Progress -Activity 'Logout' -Status "Logging out in $((15 - $i)) seconds" -PercentComplete (($i / $seconds) * 100)
-        Start-Sleep -Seconds 1
-    }
-    Write-Host 'Onboarding Complete, User removed from Administrator group'
-    Pause
-}
+Write-Host 'Onboarding Complete, User removed from Administrator group'
+Pause
