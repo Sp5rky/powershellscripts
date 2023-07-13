@@ -1,6 +1,6 @@
 <#
 .NOTES
-    Version:          1.0.0
+    Version:          1.0
     Author:           George Slight @ Twisted Fish
     Creation Date:    July 13, 2023
 #>
