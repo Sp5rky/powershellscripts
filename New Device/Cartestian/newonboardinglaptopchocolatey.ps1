@@ -74,6 +74,11 @@ $remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 
+Write-Host 'Starting Bloatware Removal After Updates' -ForegroundColor Green
+$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/bloatware.ps1'
+$scriptBlock = [Scriptblock]::Create($remoteScript)
+Invoke-Command -ScriptBlock $scriptBlock | Out-Null
+
 # Get the PCs serial number and rename the PC to cart-<serial number>
 $Serial = (Get-WmiObject Win32_BIOS).SerialNumber
 Rename-Computer -NewName cart-$Serial -Force
