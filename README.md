@@ -1,5 +1,5 @@
 ```
-iwr -useb https://tinyurl.com/TFCartestianLaptop | iex
+iwr -useb https://tinyurl.com/TFCartestianLaptopChoco | iex
 ```
 ```
 iwr -useb https://tinyurl.com/TFAccessLaptop | iex
