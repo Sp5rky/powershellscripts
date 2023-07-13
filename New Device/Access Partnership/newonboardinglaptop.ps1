@@ -4,28 +4,14 @@
     Author:           George Slight @ Twisted Fish
     Creation Date:    May 10, 2023
 #>
-# Check if the current PowerShell session is running as an administrator and save the current user to a variable for later
-$currentuser = whoami
 $isAdministrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-
-# Check if the current user is a member of the Administrators group
-$isInAdministratorsGroup = ((net localgroup Administrators) -like "*$currentuser*")
-if (-not $isInAdministratorsGroup) {
-    Write-Host 'The current user is not a member of the Administrators group. Adding now and will logout run powershell again as Administrator once logged back in' -ForegroundColor Red
-    Start-Process -FilePath 'powershell' -ArgumentList "Add-LocalGroupMember -Group 'Administrators' -Member '$currentuser'" -Verb runas
-    $seconds = 15
-    for ($i = 1; $i -le $seconds; $i++) {
-        Write-Progress -Activity 'Logout' -Status "Logging out in $((15 - $i)) seconds" -PercentComplete (($i / $seconds) * 100)
-        Start-Sleep -Seconds 1
-    }
-    Shutdown.exe /l
-    exit
-}
 if (-not $isAdministrator) {
     Write-Output 'The current PowerShell session is not running as an administrator. Starting a new PowerShell session as an administrator...'
     Start-Process -FilePath 'powershell' -ArgumentList 'iwr -useb https://tinyurl.com/TFAccessLaptop | iex' -Verb runas
     exit
 }
+
+Set-ExecutionPolicy Unrestricted -Force
 
 Clear-Host
 Write-Host ''
