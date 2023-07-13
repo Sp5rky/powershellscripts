@@ -46,7 +46,7 @@ Write-Host '3 for Standard'
 $laptoptype = Read-Host 'Please enter your choice'
 
 Write-Host 'Starting Chocolatey Install' -ForegroundColor Green
-$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/WingetInstall.ps1'
+$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/chocoatelyinstall.ps1'
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 
@@ -69,7 +69,7 @@ $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock | Out-Null
 
 Write-Host 'Starting Application Download/Install' -ForegroundColor Green
-$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/New%20Device/Cartestian/applications.ps1'
+$remoteScript = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/Sp5rky/powershellscripts/main/New%20Device/Cartestian/applicationschocolatey.ps1'
 $scriptBlock = [Scriptblock]::Create($remoteScript)
 Invoke-Command -ScriptBlock $scriptBlock -ArgumentList $laptoptype | Out-Null
 
