@@ -40,7 +40,6 @@ function Developer {
     $devapps = @(
         'pgadmin4'
         'git'
-        'postman'
         'awscli'
         'nodejs'
         'oraclejdk'
