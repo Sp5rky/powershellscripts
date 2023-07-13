@@ -30,7 +30,7 @@ function Standard {
         $current++
         $percentComplete = ($current / $total) * 100
         Write-Progress -Activity 'Installing Standard laptop' -Status "Installing $app" -PercentComplete $percentComplete
-        choco -y -f --acceptlicense $app
+        choco install -y -f $app
     }
     Write-Progress -Activity 'Installing Standard laptop' -Completed
 }
@@ -58,7 +58,7 @@ function Developer {
         $current++
         $percentComplete = ($current / $total) * 100
         Write-Progress -Activity 'Installing Developer laptop' -Status "Installing $devapp" -PercentComplete $percentComplete
-        choco -y -f --acceptlicense $devapp
+        choco install -y -f $devapp
     }
     Write-Progress -Activity 'Installing Developer laptop' -Completed
 
@@ -172,7 +172,7 @@ function Analytics {
         $current++
         $percentComplete = ($current / $total) * 100
         Write-Progress -Activity 'Installing Analytics laptop' -Status "Installing $analapp" -PercentComplete $percentComplete
-        choco -y -f --acceptlicense $analapp
+        choco install -y -f $analapp
     }
     Write-Progress -Activity 'Installing Analytics laptop' -Completed
 
